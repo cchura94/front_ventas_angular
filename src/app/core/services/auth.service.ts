@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   loginConNode(datos: User){
-      return this.http.post('https://jsonplaceholder.typicode.com/post', datos);
+      return this.http.post('http://127.0.0.1:3000/api/auth/login', datos);
   }
 
 }
