@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms"
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+
 
 interface User {
   email: string | null | undefined,
@@ -19,7 +21,7 @@ export class LoginComponent {
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService, private router: Router){}
 
   ingresar(){
 
@@ -31,9 +33,16 @@ export class LoginComponent {
     this.authService.loginConNode(datos).subscribe(
       (res: any) => {
         console.log(res)
+        // token
+        localStorage.setItem('access_token', res.access_token)
+
+        this.router.navigate(['/admin/perfil'])
+
       },
       (error: any) => {
-        console.log(error)
+        console.log(error.error.message)
+        alert(error.error.message)
+        // errores
       }
     )
     

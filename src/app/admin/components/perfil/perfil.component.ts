@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent {
+
+  constructor(private authService: AuthService){
+    this.authService.getPerfil().subscribe(
+      (res: any) => {
+        console.log(res)
+      }
+    )
+  }
+
+
 
 }

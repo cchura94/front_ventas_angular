@@ -3,18 +3,20 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class PeticionInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    const token = "ABC.XYZ.123********************"
+    const token = localStorage.getItem('access_token');
 
     let peticion = request.clone({
       setHeaders: {
@@ -22,7 +24,18 @@ export class PeticionInterceptor implements HttpInterceptor {
         'Authorization': 'Bearer ' + token
       }
     })
-    return next.handle(peticion);
+    return next.handle(peticion).pipe(tap(()=>{},
+      (error: any) => {
+        console.log("ERRRRRORORRR: ", error)
+        if(error instanceof HttpErrorResponse){
+          if(error.status !== 401){
+            return
+          }
+          localStorage.removeItem('access_token');
+          this.router.navigate(['/auth/login'])
+        }
+      }
+    ));
     // 403, 401
   }
 }
