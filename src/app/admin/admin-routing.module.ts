@@ -1,12 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppLayoutComponent } from '../layout/app.layout.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 
 const routes: Routes = [
   {
-    path: 'perfil',
-    component: PerfilComponent
-  }
+    path: '',
+    component: AppLayoutComponent,
+    children: [
+      { 
+        path: '',
+        loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'perfil',
+        component: PerfilComponent
+      },
+      {
+        path: 'categoria',
+        component: PerfilComponent
+      }
+
+    ]
+  },
 ];
 
 @NgModule({
