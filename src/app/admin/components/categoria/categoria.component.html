@@ -1,0 +1,48 @@
+<div class="card">
+    <h1>Gestion categorias</h1>
+
+
+    <p-button (click)="showDialog()" icon="pi pi-external-link" label="Nueva Categoria"></p-button>
+<p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    
+    {{ categoriaForm.value | json }}
+
+    <form [formGroup]="categoriaForm">
+        <label for="">Ingrese Nombre:</label>
+        <input type="text" pInputText formControlName="nombre">
+        <br>
+        <label for="">Ingrese Detalles</label>
+        <input type="text" pInputText formControlName="detalle">
+        
+        <br>
+        <button [disabled]="!categoriaForm.valid" (click)="guardarCategoria()">Guardar</button>
+    
+    </form>
+
+
+</p-dialog>
+
+<p-progressSpinner *ngIf="loading" styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    <p-table [value]="categorias" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>DETALLE</th>
+                <th>ACCION</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-categoria>
+            <tr>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nombre }}</td>
+                <td>{{ categoria.detalle }}</td>
+                <td>
+                    <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-warning" (click)="editarCategoria(categoria)"></p-button>
+                    <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-danger" (click)="eliminarCategoria(categoria.id)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+</div>
