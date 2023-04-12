@@ -12,23 +12,34 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ProductoComponent } from './components/producto/producto.component';
+import {ToastModule} from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { FileUploadModule } from 'primeng/fileupload';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
     PerfilComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    ProductoComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     AdminRoutingModule,
+    
     CoreModule,
     TableModule,
     DialogModule,
     ButtonModule,
     InputTextModule,
     AvatarModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ToastModule,
+    ToolbarModule,
+    FileUploadModule,
+    ConfirmDialogModule
     
   ]
 })

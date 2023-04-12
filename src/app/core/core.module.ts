@@ -4,6 +4,7 @@ import { AuthService } from './services/auth.service';
 import { PeticionInterceptor } from '../interceptors/peticion.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CategoriaService } from './services/categoria.service';
+import { ProductoService } from './services/producto.service';
 
 
 
@@ -20,7 +21,8 @@ import { CategoriaService } from './services/categoria.service';
       useClass: PeticionInterceptor,
       multi: true
     },
-    CategoriaService
+    CategoriaService,
+    ProductoService
   ]
 })
 export class CoreModule { }
