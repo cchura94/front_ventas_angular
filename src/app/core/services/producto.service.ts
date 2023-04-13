@@ -12,7 +12,7 @@ export class ProductoService {
 
   listar(page=1, limit=5, q=''){
     // borrar categoria_id=2
-    return this.http.get(`${this.url_servidor}/v1/producto?page=${page}&limit=${limit}&q=${q}&categoria_id=2`)
+    return this.http.get(`${this.url_servidor}/v1/producto?page=${page}&limit=${limit}&q=${q}`)
     // return await axios.get(`${this.url_servidor}/v1/producto?page=1&limit=5&q=&categoria_id=1`);
   }
   guardar(datos:any){

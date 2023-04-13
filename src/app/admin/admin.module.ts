@@ -17,6 +17,9 @@ import {ToastModule} from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { FileUploadModule } from 'primeng/fileupload';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ToastModule,
     ToolbarModule,
     FileUploadModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    RadioButtonModule,
+    InputNumberModule,
+    InputTextareaModule
     
   ]
 })

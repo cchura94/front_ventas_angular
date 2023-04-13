@@ -21,6 +21,7 @@ export class PeticionInterceptor implements HttpInterceptor {
     let peticion = request.clone({
       setHeaders: {
         'Accept': 'application/json',
+        // 'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       }
     })

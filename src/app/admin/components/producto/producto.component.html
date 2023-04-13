@@ -13,7 +13,7 @@
         </ng-template>
     </p-toolbar>
 
-    <p-table #dt [value]="products" [rows]="3" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" [tableStyle]="{'min-width': '75rem'}"
+    <p-table #dt [value]="products" [lazy]="true" [rows]="5" [loading]="loading" [totalRecords]="totalRecords" (onLazyLoad)="getProductos($event)" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" [tableStyle]="{'min-width': '75rem'}"
         [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} productos" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
@@ -27,10 +27,10 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 4rem">
+                <th style="width: 0rem">
                     <!--<p-tableHeaderCheckbox></p-tableHeaderCheckbox>-->
                 </th>
-                <th pSortableColumn="nombre" style="min-width:15rem">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
+                <th pSortableColumn="nombre" style="min-width:10rem">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
                 <th>Image</th>
                 <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
                 <th pSortableColumn="categoriaId" style="min-width:10rem">Categoria <p-sortIcon field="categoriaId"></p-sortIcon></th>
@@ -45,7 +45,7 @@
                 <td>{{product.nombre}}</td>
                 <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
                 <td>{{product.precio | currency:'USD'}}</td>
-                <td>{{product.categoriaId}}</td>
+                <td>{{product.Categorium?.nombre}}</td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
@@ -59,3 +59,47 @@
         </ng-template>
     </p-table>
 </div>
+
+
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content" [formGroup]="productoForm">
+        {{ productoForm.value | json }}
+        <!--<img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image"> -->
+        <div class="field">
+            <label for="name">Nombre</label>
+            <input type="text" pInputText id="name" required autofocus formControlName="nombre" />
+            <small class="p-error" *ngIf="submitted && !product.nombre">El Nombre es Requerido.</small>
+        </div>
+        <div class="field">
+            <label for="description">Descripción</label>
+            <textarea id="description" pInputTextarea rows="3" cols="20" formControlName="descripcion"></textarea>
+        </div>
+
+        <div class="field">
+            <label class="mb-3">Categoria</label>
+            <div class="formgrid grid">
+                <div class="field-radiobutton col-6" *ngFor="let cat of categorias">
+                    <p-radioButton value="{{cat.id}}" formControlName="categoriaId"></p-radioButton>
+                    <label for="category1">{{ cat.nombre }}</label>
+                </div>
+               
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col">
+                <label for="price">Precio</label>
+                <p-inputNumber id="price" mode="currency" currency="USD" locale="en-US" formControlName="precio"></p-inputNumber>
+            </div>
+            <div class="field col">
+                <label for="quantity">Cantidad</label>
+                <p-inputNumber id="quantity" formControlName="stock"></p-inputNumber>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
