@@ -8,6 +8,9 @@ import { ReactiveFormsModule } from "@angular/forms"
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '../core/core.module';
 
+import { PasswordModule } from "primeng/password"
+import { ButtonModule } from "primeng/button"
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -18,7 +21,9 @@ import { CoreModule } from '../core/core.module';
     AuthRoutingModule,
     ReactiveFormsModule,
     // HttpClientModule,
-    CoreModule
+    CoreModule,
+    PasswordModule,
+    ButtonModule
   ],
 })
 export class AuthModule { }

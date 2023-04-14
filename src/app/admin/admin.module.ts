@@ -20,12 +20,16 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import { NuevoPedidoComponent } from './components/pedido/nuevo-pedido/nuevo-pedido.component';
+import { ListaPedidoComponent } from './components/pedido/lista-pedido/lista-pedido.component';
 
 @NgModule({
   declarations: [
     PerfilComponent,
     CategoriaComponent,
-    ProductoComponent
+    ProductoComponent,
+    NuevoPedidoComponent,
+    ListaPedidoComponent
   ],
   imports: [
     CommonModule,

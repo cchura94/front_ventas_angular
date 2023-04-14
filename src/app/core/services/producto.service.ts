@@ -27,4 +27,8 @@ export class ProductoService {
   eliminar(id: Number){
     return this.http.delete(`${this.url_servidor}/v1/producto/${id}`) 
   }
+
+  actualizarImagen(id: number, fd: any){
+    return this.http.post(`${this.url_servidor}/v1/producto/${id}/actualizar-imagen`, fd)
+  }
 }

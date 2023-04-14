@@ -31,7 +31,7 @@
                     <!--<p-tableHeaderCheckbox></p-tableHeaderCheckbox>-->
                 </th>
                 <th pSortableColumn="nombre" style="min-width:10rem">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
-                <th>Image</th>
+                <th style="min-width:0rem">Imagen</th>
                 <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
                 <th pSortableColumn="categoriaId" style="min-width:10rem">Categoria <p-sortIcon field="categoriaId"></p-sortIcon></th>
                 <th></th>
@@ -43,7 +43,9 @@
                     <!--<p-tableCheckbox [value]="product"></p-tableCheckbox>-->
                 </td>
                 <td>{{product.nombre}}</td>
-                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
+                <td><img [src]="'http://127.0.0.1:3000/imagenes/' + product.imagen" [alt]="product.nombre" width="100" class="shadow-4" />
+                    <p-button (click)="showModalDialogImage(product)" icon="pi pi-image" label=""></p-button>
+                </td>
                 <td>{{product.precio | currency:'USD'}}</td>
                 <td>{{product.Categorium?.nombre}}</td>
                 <td>
@@ -102,4 +104,22 @@
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
         <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
     </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Imagen" [(visible)]="displayModalImage" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+
+    <p-fileUpload name="demo[]" [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*">
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template>
+    </p-fileUpload>
+    
+    
+        <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModalImage=false" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
 </p-dialog>
