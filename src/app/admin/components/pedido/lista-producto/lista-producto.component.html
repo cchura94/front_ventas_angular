@@ -1,0 +1,25 @@
+<table border="1">
+
+    <tr>
+        <td>NOMBRE</td>
+        <td>PRECIO</td>
+        <td>CANTIDAD</td>
+        <td>ACCION</td>
+    </tr>
+    <tr *ngFor="let prod of productos">
+        <td>{{ prod.nombre }}</td>
+        <td>{{prod.precio}}</td>
+        <td>{{prod.stock}}</td>
+        <td>
+            <button type="button" (click)="addCarrito(prod)">+</button>
+        </td>
+    </tr>
+
+</table>
+<!-- <h2>{{ titulo }}</h2>
+<input type="text" [(ngModel)]="titulo">
+
+<img [src]="imagenURL" width="100%" alt="">
+<button (click)="addCarrito('Hola desde HTML')">Agregar Carrito</button>
+
+-->

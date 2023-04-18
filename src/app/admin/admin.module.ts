@@ -9,7 +9,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ProductoComponent } from './components/producto/producto.component';
@@ -22,6 +22,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { NuevoPedidoComponent } from './components/pedido/nuevo-pedido/nuevo-pedido.component';
 import { ListaPedidoComponent } from './components/pedido/lista-pedido/lista-pedido.component';
+import { ListaProductoComponent } from './components/pedido/lista-producto/lista-producto.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +30,13 @@ import { ListaPedidoComponent } from './components/pedido/lista-pedido/lista-ped
     CategoriaComponent,
     ProductoComponent,
     NuevoPedidoComponent,
-    ListaPedidoComponent
+    ListaPedidoComponent,
+    ListaProductoComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     AdminRoutingModule,
     
     CoreModule,

@@ -2,11 +2,13 @@
     <div class="col-7">
         <div class="card">
             <h6>Lista de Productos</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam possimus repellat, quaerat maxime nesciunt animi, quos id quas a dicta numquam, voluptatibus est nulla commodi neque repellendus placeat reiciendis ut.
-            Rem iure, blanditiis, architecto, maiores impedit dolore reprehenderit eum pariatur tenetur similique quam voluptate obcaecati illum quasi at facere explicabo vitae eius debitis doloribus laborum aspernatur exercitationem. Ut, assumenda ex.
-            Temporibus veritatis id aliquid ea aut suscipit ut nobis commodi perferendis rem sunt earum rerum omnis fuga recusandae quam repellendus vero accusantium itaque, quisquam sed corporis magni ipsum. Aliquid, eligendi?
-            Fuga eligendi blanditiis expedita nobis modi maxime, ipsum nam ut dignissimos eius minus debitis quaerat quis at. Aspernatur officia sapiente odio autem unde fugit, ipsam quaerat id repellendus ab dolores?
-            Nisi esse nostrum perspiciatis, libero vel doloremque numquam placeat laudantium nam labore quod impedit magnam quo eos? Commodi laborum praesentium consequuntur, accusamus minima nesciunt architecto unde recusandae amet aut blanditiis.</p>
+            <!--
+            <h6>{{ tituloDelPadre }}</h6>
+            <h6>{{ datodelHijo }}</h6>
+            -->
+
+            <app-lista-producto (producto)="asignarProducto($event)" [titulo]="tituloDelPadre"></app-lista-producto>
+           
         </div>
     </div>
     <div class="col-5">
@@ -14,6 +16,22 @@
             <div class="col-12">
                 <div class="card">
                     <h6>Carrito</h6>
+                    <table border="1">
+                        <tr>
+                            <td>NOMBRE</td>
+                            <td>PRECIO</td>
+                            <td>CANT</td>
+                            <td>ACCION</td>
+                        </tr>
+                        <tr *ngFor="let car of carrito">
+                            <td>{{ car.nombre }}</td>
+                            <td>{{ car.precio }}</td>
+                            <td>{{ car.cantidad }}</td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="col-12">

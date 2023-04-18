@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class NuevoPedidoComponent {
 
+  tituloDelPadre: string = "Este es el titulo enviado desde el Padre"
+
+  datodelHijo: string=""
+  carrito: any[] = []
+
+  capturadatosDelHijo(dato: string) {
+    console.log(dato)
+    this.datodelHijo = dato
+  }
+
+  asignarProducto(prod: any) {
+    let p = {id: prod.id, nombre: prod.nombre, cantidad: 1, precio: prod.precio}
+    this.carrito.push(p)
+  }
+
 }
