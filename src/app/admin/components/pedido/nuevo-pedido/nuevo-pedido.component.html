@@ -37,11 +37,20 @@
             <div class="col-12">
                 <div class="card">
                     <h6>Cliente</h6>
+                    <p-button (click)="showModalDialogCliente()" icon="pi pi-external-link" label="Nuevo Cliente"></p-button>
+                    <!--{{ cliente|json }}-->
+                    <div *ngIf="cliente.id > 0">
+                        <h5>NOMBRE COM: {{ cliente.nombre_completo }}</h5>
+                        <h5>CI/NIT: {{ cliente.ci_nit }}</h5>
+                    </div>
+
                 </div>
             </div>
             <div class="col-12">
                 <div class="card">
                     <h6>Pedido</h6>
+                    <p-button (click)="guardarPedido()" icon="pi pi-save" label="Registrar Pedido"></p-button>
+                    
                 </div>
             </div>
         </div>
@@ -49,3 +58,28 @@
     </div>
     
 </div>
+
+<p-dialog header="Nuevo Cliente" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false" class="p-fluid">
+    
+    <label for="">Nombre Completo *: </label>
+    <input type="text" pInputText [(ngModel)]="cliente.nombre_completo"> 
+    <br>
+    <label for="">CI / NIT: </label>
+    <input type="text" pInputText [(ngModel)]="cliente.ci_nit"> 
+    <br>   
+    
+    <label for="">Correo:</label>
+    <input type="text" pInputText [(ngModel)]="cliente.correo"> 
+    <br>
+    <label for="">Telefono:</label>
+    <input type="text" pInputText [(ngModel)]="cliente.telefono"> 
+    <br>
+    <label for="">Dirección:</label>
+    <input type="text" pInputText [(ngModel)]="cliente.direccion"> 
+    <br>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="guardarCliente()" label="Guardar" styleClass="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>
