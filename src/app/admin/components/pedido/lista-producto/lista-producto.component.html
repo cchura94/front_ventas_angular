@@ -1,5 +1,5 @@
 <table border="1">
-
+<!--
     <tr>
         <td>NOMBRE</td>
         <td>PRECIO</td>
@@ -16,6 +16,27 @@
     </tr>
 
 </table>
+-->
+<p-table [value]="productos">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>NOMBRE</th>
+            <th>PRECIO</th>
+            <th>CANTIDAD</th>
+            <th>ACCION</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.nombre}}</td>
+            <td>{{product.precio}}</td>
+            <td>{{product.stock}}</td>
+            <td>
+                <button pButton pRipple icon="pi pi-plus" (click)="addCarrito(product)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
 <!-- <h2>{{ titulo }}</h2>
 <input type="text" [(ngModel)]="titulo">
 

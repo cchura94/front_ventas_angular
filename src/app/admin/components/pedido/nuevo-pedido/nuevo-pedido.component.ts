@@ -16,6 +16,8 @@ export class NuevoPedidoComponent {
 
   cliente: any = {id: -1, nombre_completo: '', ci_nit:'', correo: '', telefono: '', direccion: ''}
 
+  buscar: string=''
+
   constructor(private pedidoService: PedidoService){
 
   }
@@ -43,6 +45,14 @@ export class NuevoPedidoComponent {
 
   }
 
+  buscarCliente(){
+    this.pedidoService.buscarCliente(this.buscar).subscribe(
+      (res: any) => {
+        this.cliente = res
+      }
+    )
+  }
+
   guardarPedido(){
     if(this.cliente.id != -1){
       const pedido = {
@@ -63,6 +73,11 @@ export class NuevoPedidoComponent {
     }else{
       alert("Seleccionar Cliente")
     }
+  }
+
+  quitarCarrito(prod: any){
+    let pos = this.carrito.indexOf(prod)
+    this.carrito.splice(pos, 1)
   }
 
 }

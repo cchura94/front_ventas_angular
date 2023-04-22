@@ -1,1 +1,82 @@
-<p>lista-pedido works!</p>
+<div class="card">
+    <button (click)="display()">Imprimir</button>
+    <p-table id="table_pedidos" [value]="pedidos" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>id</th>
+                <th>fecha</th>
+                <th>Cliente</th>
+                <th>Productos</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pedido>
+            <tr>
+                <td>{{pedido.id}}</td>
+                <td>{{pedido.fecha}}</td>
+                <td>{{pedido.Cliente.nombre_completo}}</td>
+                <td class="oculto">
+                    <p-button (click)="showModalDialog(pedido)" icon="pi pi-external-link"
+                        label="Ver Más Detalles"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<p-dialog header="Datos Pedido" [(visible)]="displayModal" [modal]="true" [style]="{width: '75vw'}" [draggable]="false"
+    [resizable]="false">
+
+    <div class="grid" *ngIf="pedido.id">
+        <div class="col-4">
+            <h5>EMPRESA: ABCYZ</h5>
+            <h5>DIRECCION: Av. 123 Z ABC</h5>
+        </div>
+        <div class="col-3"></div>
+        <div class="col-5">
+            <h5># PEDIDO: {{ pedido.id }}</h5>
+            <h5>FECHA: {{ pedido.fecha }}</h5>
+            <h5>ESTADO: {{ pedido.estado }}</h5>
+            <h5>OBSERVACIONES: {{ pedido.observacion }}</h5>            
+        </div>
+        <div class="col-7"></div>
+        <div class="col-5">
+            <h5>NOMBRE COMPLETO: {{ pedido.Cliente.nombre_completo }}</h5>
+            <h5>CI/NIT: {{ pedido.Cliente.ci_nit }}</h5>
+            <h5>CORREO: {{ pedido.Cliente.correo }}</h5>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="col-12">
+            <div class="card">
+                <p-table [value]="pedido.Productos" [tableStyle]="{'min-width': '30rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>id</th>
+                            <th>NOMBRE</th>
+                            <th>PRECIO</th>
+                            <th>CANTIDAD</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-prod>
+                        <tr>
+                            <td>{{prod.id}}</td>
+                            <td>{{prod.nombre}}</td>
+                            <td>{{prod.precio}}</td>
+                            <td>
+                                {{prod.PedidoProducto.cantidad}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModal=false" label="Cerrar" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

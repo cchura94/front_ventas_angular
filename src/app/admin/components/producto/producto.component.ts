@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { Categoria } from 'src/app/core/interfaces/categoria';
+import { Producto } from 'src/app/core/interfaces/producto';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { ProductoService } from 'src/app/core/services/producto.service';
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-producto',
@@ -16,8 +19,8 @@ export class ProductoComponent implements OnInit {
   productDialog: boolean = false;
   displayModalImage: boolean = false
 
-  products!: any[];
-  categorias!: any[];
+  products: Producto[]=[];
+  categorias: Categoria[]=[];
   loading: boolean = true
   totalRecords: number = 0;
 
@@ -27,6 +30,7 @@ export class ProductoComponent implements OnInit {
 
   submitted: boolean = false;
   uploadedFiles: any[] = [];
+  data!: [][];
 
   productoForm = new FormGroup({
     nombre: new FormControl('', Validators.required),
@@ -63,7 +67,7 @@ export class ProductoComponent implements OnInit {
     }
 
     this.productoService.listar(page, limit).subscribe(
-      (data: any) => {
+      (data: {count: number, rows: Producto[]}) => {
         this.products = data.rows
         this.totalRecords = data.count;
 
@@ -191,6 +195,22 @@ export class ProductoComponent implements OnInit {
       }
     )
 
+  }
+
+  exportarArchivo(){
+    console.log([this.products,[]])
+    /* generar una hoja de trabajo */
+    let data:any[] = [];
+    this.products.forEach(prod => {
+      data.push([prod.id, prod.nombre, prod.stock, prod.precio]);         
+    });
+    data = [["ID", "NOMBRE", "STOCK", "Precio"], ...data]
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+    /* generar libro de trabajo y agregar la hoja de trabajo */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    /* guardar en archivo */
+    XLSX.writeFile(wb, 'datos.xlsx');
   }
 
 

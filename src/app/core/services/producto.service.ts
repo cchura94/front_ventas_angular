@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Producto } from '../interfaces/producto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProductoService {
 
   listar(page=1, limit=5, q=''){
     // borrar categoria_id=2
-    return this.http.get(`${this.url_servidor}/v1/producto?page=${page}&limit=${limit}&q=${q}`)
+    return this.http.get<{rows: Producto[], count: number}>(`${this.url_servidor}/v1/producto?page=${page}&limit=${limit}&q=${q}`)
     // return await axios.get(`${this.url_servidor}/v1/producto?page=1&limit=5&q=&categoria_id=1`);
   }
   guardar(datos:any){

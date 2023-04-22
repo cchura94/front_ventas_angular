@@ -16,6 +16,7 @@
             <div class="col-12">
                 <div class="card">
                     <h6>Carrito</h6>
+                    <!--
                     <table border="1">
                         <tr>
                             <td>NOMBRE</td>
@@ -23,21 +24,44 @@
                             <td>CANT</td>
                             <td>ACCION</td>
                         </tr>
-                        <tr *ngFor="let car of carrito">
+                        <tr *ngFor="let car of carrito;let pos=index">
                             <td>{{ car.nombre }}</td>
                             <td>{{ car.precio }}</td>
                             <td>{{ car.cantidad }}</td>
                             <td>
-                                
+                                <button (click)="quitarCarrito(pos)">x</button>                                
                             </td>
                         </tr>
                     </table>
+                -->
+                    <p-table [value]="carrito">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>NOMBRE</th>
+                                <th>PRECIO</th>
+                                <th>CANT</th>
+                                <th>ACCION</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-car>
+                            <tr>
+                                <td>{{car.nombre}}</td>
+                                <td>{{car.precio}}</td>
+                                <td>{{car.cantidad}}</td>
+                                <td>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="quitarCarrito(car)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
             </div>
             <div class="col-12">
                 <div class="card">
                     <h6>Cliente</h6>
                     <p-button (click)="showModalDialogCliente()" icon="pi pi-external-link" label="Nuevo Cliente"></p-button>
+                    <input type="text" pInputText [(ngModel)]="buscar">
+                    <button pButton pRipple icon="pi pi-search" class="p-button-warning" (click)="buscarCliente()"></button> 
                     <!--{{ cliente|json }}-->
                     <div *ngIf="cliente.id > 0">
                         <h5>NOMBRE COM: {{ cliente.nombre_completo }}</h5>

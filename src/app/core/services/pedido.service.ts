@@ -29,4 +29,7 @@ export class PedidoService {
   guardarCliente(datos: any) {
     return this.http.post(`${this.url_servidor}/v1/pedido/nuevo-cliente`, datos)
   }
+  buscarCliente(buscar: string){
+    return this.http.get(`${this.url_servidor}/v1/pedido/buscar-cliente?buscar=${buscar}`)
+  }
 }

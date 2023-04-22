@@ -1,12 +1,16 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProductoService } from 'src/app/core/services/producto.service';
 
+
+
 @Component({
   selector: 'app-lista-producto',
   templateUrl: './lista-producto.component.html',
   styleUrls: ['./lista-producto.component.scss']
 })
 export class ListaProductoComponent {
+
+  
 
   @Input() titulo: string = "Valor del Comp Hijo"
   // @Output() varhijo = new EventEmitter();

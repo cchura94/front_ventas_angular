@@ -5,6 +5,11 @@
         <ng-template pTemplate="left">
             <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
             <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+            	
+<button type="button" 
+        (click)="exportarArchivo()">
+  		exportar
+</button>
         </ng-template>
 
         <ng-template pTemplate="right">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Categoria } from "./../../../core/interfaces/categoria"
 
 @Component({
   selector: 'app-categoria',
@@ -9,9 +10,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CategoriaComponent implements OnInit {
 
-  categorias = []
+  categorias:Categoria[] = [];
   visible: boolean = false;
   loading: boolean = false
+
+  
 
   categoriaForm = new FormGroup({
     nombre: new FormControl('', [Validators.required]),
@@ -31,7 +34,7 @@ export class CategoriaComponent implements OnInit {
   listarCategorias() {
     this.loading = true;
     this.categoriaService.listar().subscribe(
-      (res: any) => {
+      (res: Categoria[]) => {
         console.log(res)
         this.categorias = res;
 
