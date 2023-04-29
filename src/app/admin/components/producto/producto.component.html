@@ -48,7 +48,7 @@
                     <!--<p-tableCheckbox [value]="product"></p-tableCheckbox>-->
                 </td>
                 <td>{{product.nombre}}</td>
-                <td><img [src]="'http://127.0.0.1:3000/imagenes/' + product.imagen" [alt]="product.nombre" width="100" class="shadow-4" />
+                <td><img [src]="'https://ventas.onrender.com/imagenes/' + product.imagen" [alt]="product.nombre" width="100" class="shadow-4" />
                     <p-button (click)="showModalDialogImage(product)" icon="pi pi-image" label=""></p-button>
                 </td>
                 <td>{{product.precio | currency:'USD'}}</td>

@@ -11,6 +11,7 @@ export class ListaPedidoComponent {
   pedidos: any[] = []
   displayModal: boolean = false;
   pedido: any = {}
+  datos_productos: any[] = []
 
   constructor(private pedidoService: PedidoService){
     this.getPedidos();
@@ -28,6 +29,12 @@ export class ListaPedidoComponent {
   showModalDialog(pedido: any){
     this.displayModal = true;
     this.pedido =  pedido;
+
+    this.pedidoService.getProductos(pedido.id).subscribe(
+      (res: any) => {
+        this.datos_productos = res.Productos
+      }
+    )
   }
 
   display() {

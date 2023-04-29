@@ -14,6 +14,9 @@ export class PedidoService {
   listar(){
     return this.http.get(`${this.url_servidor}/v1/pedido`)
   }
+  getProductos(id:Number){
+    return this.http.get(`${this.url_servidor}/v1/pedido/${id}/get-productos`) 
+  }
   guardar(datos:any){
     return this.http.post(`${this.url_servidor}/v1/pedido`, datos)    
   }
